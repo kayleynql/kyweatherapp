@@ -23,8 +23,12 @@ function displayTemperature(response) {
     windElement.innerHTML= Math.round(response.data.wind.speed);
     let dateElement=document.querySelector("#date");
     dateElement.innerHTML= formatDate(response.data.dt*1000);
+    let iconElement=document.querySelector("#icon");
+    iconElement.setAttribute("src",`https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+    iconElement.setAttribute("alt",`https://openweathermap.org/img/wn/${response.data.weather[0].description}@2x.png`);
+
 }
 let apiKey = "ed238469f9b5e9d801834270e65449bc";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New York&appid=${apiKey}&units=metric`;
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Singapore&appid=${apiKey}&units=metric`;
 
 axios.get(apiUrl).then(displayTemperature);
