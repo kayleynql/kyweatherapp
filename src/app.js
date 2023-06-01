@@ -12,7 +12,8 @@ function formatDate(timestamp){
 }
 function displayTemperature(response) {
     let temperatureElement= document.querySelector("#temperature");
-    temperatureElement.innerHTML= Math.round(response.data.main.temp);
+    celsiusTemperature = response.data.main.temp;
+    temperatureElement.innerHTML= Math.round(celsiusTemperature);
     let cityElement=document.querySelector("#city");
     cityElement.innerHTML= response.data.name;
     let descriptionElement=document.querySelector("#description");
@@ -27,6 +28,7 @@ function displayTemperature(response) {
     iconElement.setAttribute("src",`https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
     iconElement.setAttribute("alt",`https://openweathermap.org/img/wn/${response.data.weather[0].description}@2x.png`);
 
+
 }
 function search (city){
     let apiKey = "ed238469f9b5e9d801834270e65449bc";
@@ -40,7 +42,31 @@ function handleSubmit(event) {
     search(cityInputElement.value);
 }
 
+function displayFahrenheitTemperature (event) {
+    event.preventDefault();
+    let FahrenheitTemperature = (celsiusTemperature * 9/5) + 32;
+    let temperatureElement = document.querySelector("#temperature");
+    celciusLink.classList.remove("active");
+    fahrenheitLink.classList.add("active");
+    temperatureElement.innerHTML=Math.round(FahrenheitTemperature)
+}
 
+function displayCelciusTemperature (event) {
+    event.preventDefault();
+    let CelciusTemperature = celsiusTemperature;
+    let temperatureElement = document.querySelector("#temperature");
+    celciusLink.classList.add("active");
+    fahrenheitLink.classList.remove("active");
+    temperatureElement.innerHTML=Math.round(celsiusTemperature)
+}
+
+let celsiusTemperate = null
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit",handleSubmit);
+
+let fahrenheitLink= document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+let celciusLink= document.querySelector("#celcius-link");
+celciusLink.addEventListener("click", displayCelciusTemperature);
