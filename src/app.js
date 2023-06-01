@@ -8,12 +8,9 @@ function formatDate(timestamp){
         minutes = `0${minutes}`};
     let days =["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     let day = days[date.getDay()]; 
-
-
     return `${day} ${hours}: ${minutes}`
 }
 function displayTemperature(response) {
-    console.log(response.data);
     let temperatureElement= document.querySelector("#temperature");
     temperatureElement.innerHTML= Math.round(response.data.main.temp);
     let cityElement=document.querySelector("#city");
